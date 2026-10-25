@@ -266,7 +266,12 @@ Route::get('/products/variations', fn () => $renderModule('التباينات', 
 Route::get('/products/import', fn () => $renderModule('استيراد المنتجات', '/products/import', 'المنتجات', 'products_import'));
 Route::get('/products/import-opening-stock', fn () => $renderModule('استيراد المخزون الافتتاحي', '/products/import-opening-stock', 'المنتجات', 'products_import_opening_stock'));
 Route::get('/products/add-opening-stock', [\App\Http\Controllers\OpeningStockController::class, 'create'])->name('products.add_opening_stock');
-Route::get('/products/selling-price-groups', fn () => $renderModule('مجموعة أسعار البيع', '/products/selling-price-groups', 'المنتجات', 'products_selling_price_groups'));
+// مجموعة أسعار البيع (Selling Price Groups)
+Route::get('/products/selling-price-groups', [\App\Http\Controllers\SellingPriceGroupController::class, 'index'])->name('products.selling_price_groups.index');
+Route::post('/products/selling-price-groups', [\App\Http\Controllers\SellingPriceGroupController::class, 'store'])->name('products.selling_price_groups.store');
+Route::put('/products/selling-price-groups/{sellingPriceGroup}', [\App\Http\Controllers\SellingPriceGroupController::class, 'update'])->name('products.selling_price_groups.update');
+Route::delete('/products/selling-price-groups/{sellingPriceGroup}', [\App\Http\Controllers\SellingPriceGroupController::class, 'destroy'])->name('products.selling_price_groups.destroy');
+Route::post('/products/selling-price-groups/{sellingPriceGroup}/toggle-active', [\App\Http\Controllers\SellingPriceGroupController::class, 'toggleActive'])->name('products.selling_price_groups.toggle_active');
 
 // ==========================================
 // 8. تصنيع (معطلة -> 404)
